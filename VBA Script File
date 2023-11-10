@@ -3,14 +3,9 @@ Sub MultipleYearStockData()
 For Each WS In Worksheets
     
     Dim WorksheetName As String
-    
-    Dim tickername As String
-    Dim tickervolume As Double
-        tickervolume = 0
     Dim summarytickerrow As Integer
-        summarytickerrow = 2
+    Dim tickervolume As Double
     Dim openprice As Double
-        openprice = WS.Cells(2, 3).Value
     Dim closeprice As Double
     Dim yearlychange As Double
     Dim perchange As Double
@@ -27,8 +22,7 @@ For Each WS In Worksheets
         WS.Cells(2, 15).Value = "Greatest % Increase"
         WS.Cells(3, 15).Value = "Greatest % Decrease"
         WS.Cells(4, 15).Value = "Greatest Total Volume"
-       
-        
+              
         TickCount = 2
         
         j = 2
@@ -36,11 +30,10 @@ For Each WS In Worksheets
         LastRow = WS.Cells(Rows.Count, 1).End(xlUp).Row
         
     For i = 2 To LastRow
-    
-        
+     
         If WS.Cells(i + 1, 1).Value <> WS.Cells(i, 1).Value Then
         WS.Cells(TickCount, 9).Value = WS.Cells(i, 1).Value
-        WS.Cells(TickCount, 10).Value = WS.Cells(i, 6).Value - WS.Cells(j, 3).Value         
+        WS.Cells(TickCount, 10).Value = WS.Cells(i, 6).Value - WS.Cells(j, 3).Value
         
         If WS.Cells(j, 3).Value <> 0 Then
         perchange = ((WS.Cells(i, 6).Value - WS.Cells(j, 3).Value) / WS.Cells(j, 3).Value)
@@ -88,12 +81,10 @@ For Each WS In Worksheets
             WS.Cells(2, 17).Value = Format(GreatIncrease, "0.00%")
             WS.Cells(3, 17).Value = Format(GreatDecrease, "0.00%")
             WS.Cells(4, 17).Value = Format(GreatVolume, "Scientific")
-
-            
-            If WS.Cells(i, 10).Value > 0 Then
+           
+        If WS.Cells(i, 10).Value > 0 Then
             WS.Cells(i, 10).Interior.ColorIndex = 4
-            
-            
+                        
         Else
             
             WS.Cells(i, 10).Interior.ColorIndex = 3
@@ -105,5 +96,6 @@ For Each WS In Worksheets
         Worksheets(WorksheetName).Columns("A:Z").AutoFit
             
     Next WS
+
 
 End Sub
